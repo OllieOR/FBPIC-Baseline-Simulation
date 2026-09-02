@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+
+# Environments and editors
+.venv/
+venv/
+.conda/
+.vscode/
+.idea/
+
+# FBPIC outputs
+diags/
+checkpoints/
+*.h5
+*.hdf5
+
+# Local logs and profiles
+*.log
+*.prof
+
+# Operating-system files
+.DS_Store
+Thumbs.db

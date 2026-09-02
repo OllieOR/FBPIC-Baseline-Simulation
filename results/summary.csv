@@ -1,0 +1,22 @@
+category,metric,value,unit,scope,qualification
+run,total_iterations,1800,iterations,simulation,Completed CPU baseline
+run,saved_snapshots,36,snapshots,iterations 0-1750,Raw HDF5 omitted from repository because of size
+run,final_analysed_time,291.87,fs,iteration 1750,
+reference,plasma_angular_frequency,1.128292e14,rad/s,input density 4.0e24 m^-3,
+reference,plasma_wavelength,16.6947,um,input density 4.0e24 m^-3,
+reference,cold_wave_breaking_field,192.318,GV/m,input density 4.0e24 m^-3,Reference scale rather than a strict nonlinear limit
+field,full_plane_ez_minimum,-693,GV/m,iteration 1750,Local reconstructed-plane extremum
+field,full_plane_ez_maximum,356,GV/m,iteration 1750,Local reconstructed-plane extremum
+field,on_axis_ez_minimum,-679.76,GV/m,iteration 1750 at z=86.53 um,Highly local peak and not convergence tested
+field,on_axis_ez_maximum,323.86,GV/m,iteration 1750 at z=86.03 um,
+field,wake_region_first_percentile,-580,GV/m,z=78-98 um at iteration 1750,Approximate value
+geometry,laser_envelope_peak,102.832,um,iteration 1750,On-axis Ex Hilbert-envelope maximum
+geometry,late_high_momentum_branch,84-87,um,iteration 1750,Wake-associated interpretation
+geometry,laser_branch_separation,16.3,um,iteration 1750,Geometrical consistency check
+particles,saved_population_charge,346.916,pC,uz>=1 at iteration 1750,Not a bunch charge
+candidate_bunch,macroparticle_count,2609,macroparticles,-20<=xi<=-14 um and uz>=4,
+candidate_bunch,charge,43.254,pC,-20<=xi<=-14 um and uz>=4,Selection dependent
+candidate_bunch,weighted_mean_energy,3.235,MeV,-20<=xi<=-14 um and uz>=4,Selection dependent
+candidate_bunch,maximum_energy,5.611,MeV,-20<=xi<=-14 um and uz>=4,High-energy tail
+candidate_bunch,weighted_rms_spread,1.072,MeV,-20<=xi<=-14 um and uz>=4,Selection dependent
+candidate_bunch,relative_rms_spread,33.14,percent,-20<=xi<=-14 um and uz>=4,Broad-spectrum population

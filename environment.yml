@@ -1,0 +1,12 @@
+name: fbpic-lwfa-baseline
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - numpy
+  - scipy
+  - matplotlib
+  - openpmd-viewer=1.7.0
+  - pip
+  - pip:
+      - fbpic==0.27.0
