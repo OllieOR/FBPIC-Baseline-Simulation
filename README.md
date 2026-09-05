@@ -1,145 +1,150 @@
-# FBPIC LWFA Baseline: Diagnostic Analysis
+# FBPIC Baseline Simulation and Analysis
 
-This repository records a small CPU-based laser-wakefield-acceleration
-baseline completed before my MPhys project, *Optimising Laser Wakefield
-Acceleration*. The aim was to establish a working FBPIC/openPMD workflow and
-produce diagnostic figures from which defensible physical conclusions could
-be extracted.
+This was my first complete FBPIC run before starting my MPhys project,
+*Optimising Laser Wakefield Acceleration*. The main aim was to get a working
+FBPIC and openPMD workflow, then use the saved data to produce a proper set of
+diagnostic figures and calculations.
 
-The simulation input is a lightly adapted CPU version of FBPIC's standard
-LWFA example. My independent work was the diagnostic workflow. This involved
-analysing the field, density and phase-space data contained in the simulation
-outputs; tracking the laser and particle populations through time;
-calculating weighted candidate-bunch quantities; and testing how sensitive
-the main conclusions were to local field extrema and analysis cuts.
+The simulation input is a lightly adapted CPU version of the standard FBPIC
+LWFA example. My own work focused on the analysis. I examined the electric
+fields, electron density and longitudinal phase space, followed the laser and
+saved electron population through time, and calculated weighted quantities for
+a possible late-time bunch. I also checked how much the main results changed
+when local field values were averaged or the bunch-selection limits were moved.
 
-This is a learning and validation baseline. It is not an optimised or
-numerically converged accelerator result.
+This is a learning and validation baseline rather than an optimised accelerator
+result. Numerical convergence has not yet been tested, so the exact peak values
+should not be treated as final predictions.
 
 ## Main results
 
-| Quantity | Baseline result | Interpretation |
-| --- | ---: | --- |
-| Reference plasma wavelength | 16.6947 micrometres | Calculated from the input density |
-| Final laser-envelope peak | 102.832 micrometres | Obtained from the on-axis transverse-field envelope |
-| Late high-momentum branch | approximately 84-87 micrometres | Located about one reference plasma wavelength behind the laser |
-| Raw minimum on-axis longitudinal field | -679.76 GV/m | A highly local peak, not a representative average wake amplitude |
-| Smoothed longitudinal-field minimum | below approximately -600 GV/m | The feature survives three- and five-cell longitudinal averaging |
-| Candidate-bunch charge | 43.254 pC | Selection dependent |
-| Candidate-bunch weighted mean energy | 3.235 MeV | More representative of the selected population than its 5.611 MeV maximum |
-| Candidate-bunch relative RMS spread | 33.14% | Broad-spectrum rather than quasi-monoenergetic |
+|Quantity|Result|What this shows|
+|-|-:|-|
+|Reference plasma wavelength|16.6947 μm|Calculated directly from the input density|
+|Final laser-envelope peak|102.832 μm|Position found from the on-axis transverse-field envelope|
+|Late high-momentum branch|Approximately 84-87 μm|About one reference plasma wavelength behind the laser|
+|Raw minimum on-axis longitudinal field|-679.76 GV m⁻¹|A very local peak rather than an average wake amplitude|
+|Smoothed longitudinal-field minimum|Below approximately -600 GV m⁻¹|The feature survives three- and five-cell averaging|
+|Candidate-bunch charge|43.254 pC|Depends on the chosen phase-space cuts|
+|Candidate-bunch weighted mean energy|3.235 MeV|More representative than the 5.611 MeV maximum|
+|Candidate-bunch relative RMS spread|33.14%|The selected population is broad rather than quasi-monoenergetic|
 
-The full reasoning, numerical tables and limitations are in
-[LWFA_analysis.md](LWFA_analysis.md). A [portable PDF copy](LWFA_analysis.pdf)
-is included for email and file-preview workflows that cannot resolve the
-Markdown file's relative image paths. A machine-readable summary is available
-in [results/summary.csv](results/summary.csv).
+The complete reasoning and numerical checks are in
+[LWFA\_analysis.md](LWFA_analysis.md). I also included a
+[PDF copy](LWFA_analysis.pdf) because it is easier to open when the Markdown
+image paths are not available. The main values are stored separately in
+[results/summary.csv](results/summary.csv).
 
-## Selected diagnostics
+## Main diagnostics
 
-The clipped density view uses a limited colour range, making the depleted
-cavity and dense sheath visible despite the highly localised on-axis
-compression that dominates the full-scale plot.
+The full density plot was dominated by a narrow on-axis compression reaching
+about 127.6 times the background density. I produced a second plot with the
+colour scale limited to five times the background density. The underlying data
+were not changed. This makes the depleted cavity and dense sheath much easier
+to see.
 
-![Electron density with the colour scale clipped to five times the background density](figures/electron_density_final_clipped_0_5n0.png)
+!\[Electron density with the colour scale clipped to five times the background density](figures/electron\_density\_final\_clipped\_0\_5n0.png)
 
-Tracking the longitudinal phase space through time makes the distinction
-between the early, regular laser-associated pattern and the later
-high-momentum branch behind the laser much clearer.
+The longitudinal phase space was then followed through five saved times. This
+showed that the early regular pattern moves with the laser, whereas a different
+high-momentum branch develops behind it later in the run.
 
-![Evolution of electron longitudinal phase space](figures/z_uz_phase_space_evolution.png)
+!\[Evolution of electron longitudinal phase space](figures/z\_uz\_phase\_space\_evolution.png)
 
-The final phase-space plot is used to identify a candidate electron-bunch
-region. The selection is defined relative to the laser position and tested
-against nearby spatial and momentum cuts in the full analysis.
+For the final bunch calculation, I selected the late branch relative to the
+measured laser position. The spatial and momentum limits are shown on the plot
+and are tested against nearby choices in the full analysis. The exact charge
+and energy values move with the lower momentum cut, but the main conclusion
+does not: the selected population contains tens of pC at a few MeV and has a
+broad energy spread.
 
-![Final phase space and candidate-bunch selection](figures/final_bunch_selection.png)
+!\[Final phase space and candidate-bunch selection](figures/final\_bunch\_selection.png)
 
-## Repository layout
+## Repository contents
 
-| Path | Contents |
-| --- | --- |
-| [simulation/](simulation/) | Baseline FBPIC input script and provenance comments |
-| [analysis/](analysis/) | Scripts used to calculate metrics and produce the diagnostic figures |
-| [figures/](figures/) | Figures generated from the completed baseline |
-| [results/](results/) | Machine-readable summary of the reported numerical results |
-| [tests/](tests/) | Lightweight checks for the reference calculations |
-| [LWFA_analysis.md](LWFA_analysis.md) | Full physical interpretation, robustness checks and limitations |
-| [LWFA_analysis.pdf](LWFA_analysis.pdf) | Portable supervisor-facing copy with all figures embedded |
-| [environment.yml](environment.yml) | Minimal reproducible Conda environment |
+|Path|Contents|
+|-|-|
+|[simulation/](simulation/)|Adapted CPU simulation input|
+|[analysis/](analysis/)|Scripts used for the calculations and figures|
+|[figures/](figures/)|Figures produced from the completed run|
+|[results/](results/)|CSV summary of the main numerical results|
+|[tests/](tests/)|Small checks for the reference calculations|
+|[LWFA\_analysis.md](LWFA_analysis.md)|Full analysis, interpretation and limitations|
+|[LWFA\_analysis.pdf](LWFA_analysis.pdf)|PDF copy of the full analysis|
+|[environment.yml](environment.yml)|Conda environment used for the workflow|
 
-## Reproducing the workflow
+## Running the baseline
 
-Create and activate the environment from the repository root:
+Create the environment from the repository root:
 
 ```bash
 conda env create -f environment.yml
 conda activate fbpic-lwfa-baseline
 ```
 
-Run the baseline from the repository root:
+Run the simulation:
 
 ```bash
-python simulation/lwfa_baseline.py
+python simulation/lwfa\\\_baseline.py
 ```
 
-FBPIC writes the openPMD diagnostics to `diags/hdf5`. The raw HDF5 output is
-not included in this repository because of its size. The completed run
-contained 36 snapshots from iterations 0 to 1750.
+FBPIC writes the openPMD diagnostics to `diags/hdf5`. These raw HDF5 files are
+not included because of their size. My completed run contained 36 snapshots
+from iterations 0 to 1750.
 
-Check the generated output:
+Check that the diagnostic output is available:
 
 ```bash
-python check_diagnostics.py
+python check\\\_diagnostics.py
 ```
 
-Run individual analyses, for example:
+The analysis scripts can then be run separately. For example:
 
 ```bash
-python analysis/plot_ez.py
-python analysis/plot_z_uz.py
-python analysis/analyse_final_bunch.py
+python analysis/plot\\\_ez.py
+python analysis/plot\\\_z\\\_uz.py
+python analysis/analyse\\\_final\\\_bunch.py
 ```
 
-For non-interactive batch execution:
+To run all analysis scripts without opening each plot window:
 
 ```bash
-for script in analysis/*.py; do MPLBACKEND=Agg python "$script"; done
+for script in analysis/\\\*.py; do MPLBACKEND=Agg python "$script"; done
 ```
 
-Run the lightweight repository checks:
+Run the repository checks with:
 
 ```bash
 python -m unittest discover -s tests
 ```
 
-## Scope and limitations
+## Limits of this baseline
 
-- The particle diagnostic only saves electrons with `u_z >= 1`; particle
-  plots therefore do not represent the complete plasma-electron population.
-- The candidate bunch is defined by explicit spatial and momentum cuts. Its
-  general interpretation is stable, but its exact charge and energy metrics
-  depend on the lower momentum threshold.
-- The raw field and density extrema are strongly localised. Their exact
-  amplitudes require resolution, sampling and azimuthal-mode convergence
-  checks.
-- The Hilbert-envelope analysis locates the on-axis transverse-field maximum;
-  it does not measure total laser energy or depletion.
-- Particle IDs were not tracked, so the maximum-energy particle cannot be
-  followed between saved times.
-- Numerical validation should precede optimisation. The next checks are
-  longitudinal and radial resolution, macroparticle sampling and retained
-  azimuthal modes.
+* The particle diagnostic only saved electrons with `u\\\_z >= 1`. The particle
+plots therefore do not show the full plasma-electron population.
+* The candidate bunch is defined using spatial and momentum cuts. Its general
+position and interpretation are stable, but the charge and energy values
+change when the lower momentum threshold is moved.
+* The raw field and density extrema are very local. Their exact values still
+need checks using different resolutions, particle sampling and retained
+azimuthal modes.
+* The Hilbert envelope gives the position and peak value of the on-axis
+transverse field. It does not measure the total laser energy or depletion.
+* Particle IDs were not followed between saved times. The plots show how the
+populations change, but they do not track one electron through the run.
+* This baseline should be numerically checked before it is used for parameter
+optimisation.
 
-## Provenance and references
+## Source and references
 
-The simulation input is adapted from the
+The simulation input was adapted from the
 [standard FBPIC LWFA example](https://fbpic.github.io/example_input/lwfa_script.html)
-and was run with FBPIC 0.27.0 on CPU. The upstream terms for the adapted input
-are retained in [licenses/FBPIC-LICENSE.txt](licenses/FBPIC-LICENSE.txt).
+and run with FBPIC 0.27.0 on CPU. The original FBPIC licence is included at
+[licenses/FBPIC-LICENSE.txt](licenses/FBPIC-LICENSE.txt).
 
-- R. Lehe *et al.*, “A spectral, quasi-cylindrical and dispersion-free
-  Particle-In-Cell algorithm,” *Computer Physics Communications* **203**,
-  66-82 (2016), [doi:10.1016/j.cpc.2016.02.007](https://doi.org/10.1016/j.cpc.2016.02.007).
-- [FBPIC documentation](https://fbpic.github.io/)
-- [openPMD-viewer documentation](https://openpmd-viewer.readthedocs.io/)
+* R. Lehe *et al.*, “A spectral, quasi-cylindrical and dispersion-free
+Particle-In-Cell algorithm,” *Computer Physics Communications* **203**,
+66-82 (2016), [doi:10.1016/j.cpc.2016.02.007](https://doi.org/10.1016/j.cpc.2016.02.007).
+* [FBPIC documentation](https://fbpic.github.io/)
+* [openPMD-viewer documentation](https://openpmd-viewer.readthedocs.io/)
+
