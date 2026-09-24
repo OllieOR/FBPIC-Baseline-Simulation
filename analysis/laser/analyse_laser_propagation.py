@@ -106,7 +106,6 @@ def measure_laser_snapshot(field, x, z, wavelength=WAVELENGTH):
 def main():
     import matplotlib.pyplot as plt
 
-    # Keep the rest of main() as it is.
     parser = argparse.ArgumentParser()
     parser.add_argument("--diagnostics", default="diags/hdf5")
     parser.add_argument("--show", action="store_true")
