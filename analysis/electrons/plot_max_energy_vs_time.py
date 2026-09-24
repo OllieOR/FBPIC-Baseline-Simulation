@@ -60,12 +60,12 @@ ax.set_title("Maximum saved-electron energy versus time")
 
 ax.grid(alpha=0.25)
 
-Path("figures").mkdir(exist_ok=True)
+Path("figures/electrons").mkdir(parents=True, exist_ok=True)
 
 plt.tight_layout()
 
 plt.savefig(
-    "figures/max_electron_energy_vs_time.png",
+    "figures/electrons/max_electron_energy_vs_time.png",
     dpi=200
 )
 

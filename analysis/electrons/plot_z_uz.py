@@ -37,11 +37,11 @@ ax.set_xlabel(r"$z$ ($\mu$m)")
 ax.set_ylabel(r"$u_z = p_z/(m_e c)$")
 ax.set_title(f"Electron longitudinal phase space at iteration {iteration}")
 
-Path("figures").mkdir(exist_ok=True)
+Path("figures/electrons").mkdir(parents=True, exist_ok=True)
 
 plt.tight_layout()
 plt.savefig(
-    "figures/z_uz_phase_space_final.png",
+    "figures/electrons/z_uz_phase_space_final.png",
     dpi=200
 )
 

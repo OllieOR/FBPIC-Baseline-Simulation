@@ -66,12 +66,12 @@ ax.set_title(
     f"Weighted electron energy spectrum at iteration {iteration}"
 )
 
-Path("figures").mkdir(exist_ok=True)
+Path("figures/electrons").mkdir(parents=True, exist_ok=True)
 
 plt.tight_layout()
 
 plt.savefig(
-    "figures/electron_energy_spectrum_final.png",
+    "figures/electrons/electron_energy_spectrum_final.png",
     dpi=200
 )
 

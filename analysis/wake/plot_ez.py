@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import numpy as np
 import matplotlib.pyplot as plt
 from openpmd_viewer import OpenPMDTimeSeries
@@ -45,5 +47,6 @@ ax.set_title(
 )
 
 fig.tight_layout()
-fig.savefig("figures/ez_final_full_scale.png", dpi=300)
+Path("figures/wake").mkdir(parents=True, exist_ok=True)
+fig.savefig("figures/wake/ez_final_full_scale.png", dpi=300)
 plt.show()

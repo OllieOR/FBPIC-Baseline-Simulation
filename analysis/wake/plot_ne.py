@@ -47,11 +47,11 @@ ax.set_xlabel(r"$z\;(\mu\mathrm{m})$")
 ax.set_ylabel(r"$r\;(\mu\mathrm{m})$")
 ax.set_title(f"Electron density at iteration {iteration}")
 
-Path("figures").mkdir(exist_ok=True)
+Path("figures/wake").mkdir(parents=True, exist_ok=True)
 
 plt.tight_layout()
 plt.savefig(
-    "figures/electron_density_final_full_scale.png",
+    "figures/wake/electron_density_final_full_scale.png",
     dpi=200
 )
 

@@ -153,11 +153,11 @@ ax.set_title("Final electron phase space and candidate bunch selection")
 
 ax.legend()
 
-Path("figures").mkdir(exist_ok=True)
+Path("figures/electrons").mkdir(parents=True, exist_ok=True)
 
 plt.tight_layout()
 
-plt.savefig("figures/final_bunch_selection.png", dpi=200)
+plt.savefig("figures/electrons/final_bunch_selection.png", dpi=200)
 
 plt.show()
 
@@ -186,6 +186,6 @@ ax.legend()
 
 plt.tight_layout()
 
-plt.savefig("figures/final_bunch_energy_spectrum.png", dpi=200)
+plt.savefig("figures/electrons/final_bunch_energy_spectrum.png", dpi=200)
 
 plt.show()

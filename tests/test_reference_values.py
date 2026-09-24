@@ -1,7 +1,7 @@
 import math
 import unittest
 
-from analysis.calculate_reference_values import calculate_reference_values
+from analysis.wake.calculate_reference_values import calculate_reference_values
 
 
 class ReferenceValueTests(unittest.TestCase):

@@ -107,12 +107,12 @@ fig.suptitle(
     fontsize=14
 )
 
-Path("figures").mkdir(exist_ok=True)
+Path("figures/laser").mkdir(parents=True, exist_ok=True)
 
 plt.tight_layout()
 
 plt.savefig(
-    "figures/laser_position_evolution.png",
+    "figures/laser/laser_position_evolution.png",
     dpi=200
 )
 

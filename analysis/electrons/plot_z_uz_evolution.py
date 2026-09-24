@@ -58,12 +58,12 @@ fig.suptitle(
     fontsize=14
 )
 
-Path("figures").mkdir(exist_ok=True)
+Path("figures/electrons").mkdir(parents=True, exist_ok=True)
 
 plt.tight_layout()
 
 plt.savefig(
-    "figures/z_uz_phase_space_evolution.png",
+    "figures/electrons/z_uz_phase_space_evolution.png",
     dpi=200
 )
 

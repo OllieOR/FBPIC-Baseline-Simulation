@@ -5,20 +5,20 @@ import numpy as np
 from openpmd_viewer import OpenPMDTimeSeries
 from scipy.constants import e
 
-DIAGNOSTIC_PATH = "diags/hdf5"
-ITERATION = 1750
+diagnostic_path = "diags/hdf5"
+iteration = 1750
 
 # Background electron density
 n_0 = 4.0e18 * 1.0e6  # cm^-3 -> m^-3
 
-figure_directory = Path("figures")
-figure_directory.mkdir(exist_ok=True)
+figure_directory = Path("figures/wake")
+figure_directory.mkdir(parents=True, exist_ok=True)
 
-ts = OpenPMDTimeSeries(DIAGNOSTIC_PATH)
+ts = OpenPMDTimeSeries(diagnostic_path)
 
 rho, info = ts.get_field(
     field="rho",
-    iteration=ITERATION,
+    iteration=iteration,
     theta=0.0,
 )
 
@@ -61,7 +61,7 @@ colourbar.set_label(r"$n_e/n_0$")
 ax.set_xlabel(r"$z\;(\mu\mathrm{m})$")
 ax.set_ylabel(r"$r\;(\mu\mathrm{m})$")
 ax.set_title(
-    rf"Electron density at iteration {ITERATION}, "
+    rf"Electron density at iteration {iteration}, "
     rf"colour scale clipped to $0$--$5n_0$"
 )
 

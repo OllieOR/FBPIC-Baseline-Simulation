@@ -47,11 +47,11 @@ ax.set_title(
     f"Transverse laser electric field at iteration {iteration}"
 )
 
-Path("figures").mkdir(exist_ok=True)
+Path("figures/laser").mkdir(parents=True, exist_ok=True)
 
 plt.tight_layout()
 plt.savefig(
-    "figures/ex_final_full_scale.png",
+    "figures/laser/ex_final_full_scale.png",
     dpi=200
 )
 

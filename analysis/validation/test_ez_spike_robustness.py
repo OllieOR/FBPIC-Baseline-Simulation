@@ -4,22 +4,22 @@ import matplotlib.pyplot as plt
 import numpy as np
 from openpmd_viewer import OpenPMDTimeSeries
 
-DIAGNOSTIC_PATH = "diags/hdf5"
-ITERATION = 1750
+diagnostic_path = "diags/hdf5"
+iteration = 1750
 
 # Region containing the wake spike but excluding the laser pulse
-WAKE_Z_MIN_UM = 78.0
-WAKE_Z_MAX_UM = 98.0
+wake_z_min_um = 78.0
+wake_z_max_um = 98.0
 
-figure_directory = Path("figures")
-figure_directory.mkdir(exist_ok=True)
+figure_directory = Path("figures/validation")
+figure_directory.mkdir(parents=True, exist_ok=True)
 
-ts = OpenPMDTimeSeries(DIAGNOSTIC_PATH)
+ts = OpenPMDTimeSeries(diagnostic_path)
 
 Ez, info = ts.get_field(
     field="E",
     coord="z",
-    iteration=ITERATION,
+    iteration=iteration,
     theta=0.0,
 )
 
@@ -54,8 +54,8 @@ z_um = z * 1e6
 Ez_axis_GVm = Ez_axis / 1e9
 
 wake_mask = (
-    (z_um >= WAKE_Z_MIN_UM)
-    & (z_um <= WAKE_Z_MAX_UM)
+    (z_um >= wake_z_min_um)
+    & (z_um <= wake_z_max_um)
     & np.isfinite(Ez_axis_GVm)
 )
 
@@ -91,7 +91,7 @@ five_cell_minimum = Ez_five[five_index]
 # Low-field percentile across the selected wake region
 first_percentile = np.percentile(Ez_wake, 1.0)
 
-print(f"Wake region: {WAKE_Z_MIN_UM:.1f}--{WAKE_Z_MAX_UM:.1f} um")
+print(f"Wake region: {wake_z_min_um:.1f}--{wake_z_max_um:.1f} um")
 print()
 print(
     f"Raw minimum:          {raw_minimum:.2f} GV/m "
@@ -152,7 +152,7 @@ ax.axhline(
 
 ax.axhline(0.0, color="black", linewidth=0.8)
 
-ax.set_xlim(WAKE_Z_MIN_UM, WAKE_Z_MAX_UM)
+ax.set_xlim(wake_z_min_um, wake_z_max_um)
 ax.set_xlabel(r"$z\;(\mu\mathrm{m})$")
 ax.set_ylabel(r"On-axis $E_z\;(\mathrm{GV\,m^{-1}})$")
 ax.set_title(r"Robustness test of the longitudinal-field spike")

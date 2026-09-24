@@ -81,12 +81,12 @@ ax.set_title("On-axis longitudinal-field extrema versus time")
 ax.legend()
 ax.grid(alpha=0.25)
 
-Path("figures").mkdir(exist_ok=True)
+Path("figures/wake").mkdir(parents=True, exist_ok=True)
 
 plt.tight_layout()
 
 plt.savefig(
-    "figures/ez_extrema_vs_time.png",
+    "figures/wake/ez_extrema_vs_time.png",
     dpi=200
 )
 
